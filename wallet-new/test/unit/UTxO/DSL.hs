@@ -57,8 +57,11 @@ module UTxO.DSL (
   , utxoToList
   , utxoDomain
   , utxoRange
+  , utxoBalance
   , utxoUnion
   , utxoUnions
+  , utxoInsert
+  , utxoDelete
   , utxoRestrictToAddr
   , utxoRestrictToInputs
   , utxoRemoveInputs
@@ -492,11 +495,20 @@ utxoDomain = Map.keysSet . utxoToMap
 utxoRange :: Utxo h a -> [Output a]
 utxoRange = Map.elems . utxoToMap
 
+utxoBalance :: Utxo h a -> Value
+utxoBalance = sum . map outVal . Map.elems . utxoToMap
+
 utxoUnion :: Hash h a => Utxo h a -> Utxo h a -> Utxo h a
 utxoUnion (Utxo utxo) (Utxo utxo') = Utxo (utxo `Map.union` utxo')
 
 utxoUnions :: Hash h a => [Utxo h a] -> Utxo h a
 utxoUnions = Utxo . Map.unions . map utxoToMap
+
+utxoInsert :: Hash h a => (Input h a, Output a) -> Utxo h a -> Utxo h a
+utxoInsert (i, o) = Utxo . Map.insert i o . utxoToMap
+
+utxoDelete :: Hash h a => Input h a -> Utxo h a -> Utxo h a
+utxoDelete i = Utxo . Map.delete i . utxoToMap
 
 -- | Filter the 'Utxo' to only contain unspent transaction outputs whose
 -- address satisfy the given predicate.
