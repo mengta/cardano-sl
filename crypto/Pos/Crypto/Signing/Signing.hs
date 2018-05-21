@@ -6,6 +6,7 @@ module Pos.Crypto.Signing.Signing
          emptyPass
        , keyGen
        , deterministicKeyGen
+       , createKeypairFromSeed
 
        -- * Signing and verification
        , sign
