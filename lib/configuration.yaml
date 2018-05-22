@@ -14762,6 +14762,42 @@ mainnet_wallet_linux64: &mainnet_wallet_linux64
       bvMinor: 1
       bvAlt: 0
 
+
+##############################################################################
+##                                                                          ##
+##   Testnet config                                                         ##
+##                                                                          ##
+##############################################################################
+
+testnet_full: &testnet_full
+  <<: *mainnet_base
+  core:
+    <<: *mainnet_base_core
+    genesis:
+      src:
+        # DEVOPS-398 fixme: new genesis
+        file: mainnet-genesis-dryrun-with-stakeholders.json
+        hash: c6a004d3d178f600cd8caa10abbebe1549bef878f0665aea2903472d5abf7323
+
+testnet_wallet: &testnet_wallet
+  <<: *testnet_full
+  update:
+    applicationName: csl-daedalus
+    applicationVersion: 0
+    lastKnownBlockVersion:
+      bvMajor: 0
+      bvMinor: 1
+      bvAlt: 0
+
+testnet_wallet_win64: &testnet_wallet_win64
+  <<: *testnet_wallet
+
+testnet_wallet_macos64: &testnet_wallet_macos64
+  <<: *testnet_wallet
+
+testnet_wallet_linux64: &testnet_wallet_linux64
+  <<: *testnet_wallet
+
 ##############################################################################
 ##                                                                          ##
 ##   Mainnet dryrun config sample                                           ##
