@@ -14775,9 +14775,8 @@ testnet_full: &testnet_full
     <<: *mainnet_base_core
     genesis:
       src:
-        # DEVOPS-398 fixme: new genesis
-        file: mainnet-genesis-dryrun-with-stakeholders.json
-        hash: c6a004d3d178f600cd8caa10abbebe1549bef878f0665aea2903472d5abf7323
+        file: testnet-genesis.json
+        hash: b04310ced30b1ff32e99c22427f755f199868d94fe90d738d22e45c91f9637b4
 
 testnet_wallet: &testnet_wallet
   <<: *testnet_full
@@ -14797,6 +14796,34 @@ testnet_wallet_macos64: &testnet_wallet_macos64
 
 testnet_wallet_linux64: &testnet_wallet_linux64
   <<: *testnet_wallet
+
+
+# Should be used to generate genesis
+testnet_gen: &testnet_gen
+  <<: *mainnet_base
+  core: &testnet_gen_core
+    <<: *mainnet_base_core
+    genesis:
+      <<: *mainnet_base_genesis
+      spec:
+        <<: *mainnet_base_spec
+        protocolConstants:
+          <<: *mainnet_base_protocolConstants
+          protocolMagic: 131480160
+        avvmDistr: *mainnet_avvmDistr
+        initializer:
+          testBalance:
+            poors:        12000
+            richmen:      7
+            richmenShare: 0.93
+            totalBalance: 13887504355000000
+            useHDAddresses: True
+          fakeAvvmBalance:
+            count: 100
+            oneBalance: 1000000000000 # 1e6 ADA
+          avvmBalanceFactor: 0.1
+          useHeavyDlg: True
+          seed: 0 # should be overridden using --configuration-seed
 
 ##############################################################################
 ##                                                                          ##
