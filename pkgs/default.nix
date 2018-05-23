@@ -7805,10 +7805,10 @@ inherit (pkgs) mesa;};
            ];
            libraryToolDepends = [ cpphs ];
            testHaskellDepends = [
-             base cardano-sl cardano-sl-block cardano-sl-client cardano-sl-core
-             cardano-sl-crypto cardano-sl-db cardano-sl-delegation
-             cardano-sl-generator cardano-sl-infra cardano-sl-lrc
-             cardano-sl-networking cardano-sl-ssc cardano-sl-txp
+             base bytestring cardano-sl cardano-sl-block cardano-sl-client
+             cardano-sl-core cardano-sl-crypto cardano-sl-db
+             cardano-sl-delegation cardano-sl-generator cardano-sl-infra
+             cardano-sl-lrc cardano-sl-networking cardano-sl-ssc cardano-sl-txp
              cardano-sl-update cardano-sl-util cardano-sl-util-test containers
              data-default deepseq ekg-core ether formatting hspec lens
              log-warper MonadRandom mtl QuickCheck safe-exceptions safecopy
